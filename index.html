@@ -273,6 +273,8 @@
             background: #f8f9fa;
             min-height: 420px; 
         }
+        
+        /* 預設濃縮全頁樣式 */
         .preview-iframe {
             position: absolute;
             top: -40px;
@@ -284,6 +286,18 @@
             border: none;
             pointer-events: none;
         }
+
+        /* 專為指定預覽圖「放大並填滿」設計的樣式 (修復置中偏左問題) */
+        .iframe-enlarge-fill {
+            width: 140% !important;
+            height: 250% !important; 
+            left: 0 !important;
+            /* 由於畫面放大了，所以隱藏工作列所需的位移(top)也要跟著等比例增加 */
+            top: -100px !important; 
+            transform: scale(0.714) !important; /* 將 1.4 倍的寬度精準縮放回 100% 填滿視窗 */
+            transform-origin: top left !important;
+        }
+
         .action-section {
             width: 250px; display: flex; flex-direction: column; align-items: center;
             justify-content: center; gap: 20px; background: #fdf0f6; padding: 25px; border-radius: 15px;
@@ -365,7 +379,7 @@
                         <img src="P1.jpg" alt="職業中文推介文書封面圖" class="book-cover-img">
                     </div>
                     <div class="book-main-topic">普通話報告與<br>推介文書</div>
-                    <div class="book-subtitle">學生版</div>
+                    <div class="book-subtitle">教師版</div>
                     <div class="book-footer">
                         <p class="book-code-dark">LAN4002</p>
                         <div class="book-icons">
@@ -632,15 +646,79 @@
                         <button class="tab-btn" onclick="switchLessonTab('pane-1-3', this)">3. 綜合練習</button>
                     </div>
                     <div class="tab-content-container">
+                        
                         <div id="pane-1-1" class="tab-pane active">
-                            <h2 style="color: #9070a1; text-align: center; margin-top: 20px;">互動課本製作中......</h2>
+                            <div class="resource-card">
+                                <div class="preview-section">
+                                    <iframe class="preview-iframe iframe-enlarge-fill" src="https://winwin1109.github.io/4002-lt1-teacher-part1/" scrolling="no"></iframe>
+                                </div>
+                                <div class="action-section">
+                                    <div class="qr-box">
+                                        <img src="lt1-tq1.jpg" alt="QR Code 1">
+                                    </div>
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt1-teacher-part1/')">
+                                        <i class="fa-solid fa-door-open"></i> 進入互動課本
+                                    </button>
+                                    <div class="small-actions">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt1-teacher-part1/'); alert('已成功複製連結！');">
+                                            <i class="fa-solid fa-link"></i> 複製連結
+                                        </button>
+                                        <a href="lt1-tq1.jpg" download="lt1-tq1.jpg" class="small-btn">
+                                            <i class="fa-solid fa-download"></i> 下載QR
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div id="pane-1-2" class="tab-pane">
-                            <h2 style="color: #9070a1; text-align: center; margin-top: 20px;">互動課本製作中......</h2>
+                            <div class="resource-card">
+                                <div class="preview-section">
+                                    <iframe class="preview-iframe iframe-enlarge-fill" src="https://winwin1109.github.io/4002-lt1-teacher-part2/" scrolling="no"></iframe>
+                                </div>
+                                <div class="action-section">
+                                    <div class="qr-box">
+                                        <img src="lt1-tq2.jpg" alt="QR Code 2">
+                                    </div>
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt1-teacher-part2/')">
+                                        <i class="fa-solid fa-door-open"></i> 進入互動課本
+                                    </button>
+                                    <div class="small-actions">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt1-teacher-part2/'); alert('已成功複製連結！');">
+                                            <i class="fa-solid fa-link"></i> 複製連結
+                                        </button>
+                                        <a href="lt1-tq2.jpg" download="lt1-tq2.jpg" class="small-btn">
+                                            <i class="fa-solid fa-download"></i> 下載QR
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div id="pane-1-3" class="tab-pane">
-                            <h2 style="color: #9070a1; text-align: center; margin-top: 20px;">互動課本製作中......</h2>
+                            <div class="resource-card">
+                                <div class="preview-section">
+                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt1-teacher-part3/" scrolling="no"></iframe>
+                                </div>
+                                <div class="action-section">
+                                    <div class="qr-box">
+                                        <img src="lt1-tq3.jpg" alt="QR Code 3">
+                                    </div>
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt1-teacher-part3/')">
+                                        <i class="fa-solid fa-door-open"></i> 進入互動課本
+                                    </button>
+                                    <div class="small-actions">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt1-teacher-part3/'); alert('已成功複製連結！');">
+                                            <i class="fa-solid fa-link"></i> 複製連結
+                                        </button>
+                                        <a href="lt1-tq3.jpg" download="lt1-tq3.jpg" class="small-btn">
+                                            <i class="fa-solid fa-download"></i> 下載QR
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -683,21 +761,21 @@
                         <div id="pane-2-1" class="tab-pane active">
                             <div class="resource-card">
                                 <div class="preview-section">
-                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt2-student-part1/" scrolling="no"></iframe>
+                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt2-teacher-part1/" scrolling="no"></iframe>
                                 </div>
                                 
                                 <div class="action-section">
                                     <div class="qr-box">
-                                        <img src="lt2-sq1.jpg" alt="QR Code 1">
+                                        <img src="lt2-tq1.jpg" alt="QR Code 1">
                                     </div>
-                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt2-student-part1/')">
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt2-teacher-part1/')">
                                         <i class="fa-solid fa-door-open"></i> 進入互動課本
                                     </button>
                                     <div class="small-actions">
-                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt2-student-part1/'); alert('已成功複製連結！');">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt2-teacher-part1/'); alert('已成功複製連結！');">
                                             <i class="fa-solid fa-link"></i> 複製連結
                                         </button>
-                                        <a href="lt2-sq1.jpg" download="lt2-sq1.jpg" class="small-btn">
+                                        <a href="lt2-tq1.jpg" download="lt2-tq1.jpg" class="small-btn">
                                             <i class="fa-solid fa-download"></i> 下載QR
                                         </a>
                                     </div>
@@ -708,20 +786,20 @@
                         <div id="pane-2-2" class="tab-pane">
                             <div class="resource-card">
                                 <div class="preview-section">
-                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt2-student-part2/" scrolling="no"></iframe>
+                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt2-teacher-part2/" scrolling="no"></iframe>
                                 </div>
                                 <div class="action-section">
                                     <div class="qr-box">
-                                        <img src="lt2-sq2.jpg" alt="QR Code 2">
+                                        <img src="lt2-tq2.jpg" alt="QR Code 2">
                                     </div>
-                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt2-student-part2/')">
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt2-teacher-part2/')">
                                         <i class="fa-solid fa-door-open"></i> 進入互動課本
                                     </button>
                                     <div class="small-actions">
-                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt2-student-part2/'); alert('已成功複製連結！');">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt2-teacher-part2/'); alert('已成功複製連結！');">
                                             <i class="fa-solid fa-link"></i> 複製連結
                                         </button>
-                                        <a href="lt2-sq2.jpg" download="lt2-sq2.jpg" class="small-btn">
+                                        <a href="lt2-tq2.jpg" download="lt2-tq2.jpg" class="small-btn">
                                             <i class="fa-solid fa-download"></i> 下載QR
                                         </a>
                                     </div>
@@ -732,20 +810,20 @@
                         <div id="pane-2-3" class="tab-pane">
                             <div class="resource-card">
                                 <div class="preview-section">
-                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt2-student-part3/" scrolling="no"></iframe>
+                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt2-teacher-part3/" scrolling="no"></iframe>
                                 </div>
                                 <div class="action-section">
                                     <div class="qr-box">
-                                        <img src="lt2-sq3.jpg" alt="QR Code 3">
+                                        <img src="lt2-tq3.jpg" alt="QR Code 3">
                                     </div>
-                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt2-student-part3/')">
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt2-teacher-part3/')">
                                         <i class="fa-solid fa-door-open"></i> 進入互動課本
                                     </button>
                                     <div class="small-actions">
-                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt2-student-part3/'); alert('已成功複製連結！');">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt2-teacher-part3/'); alert('已成功複製連結！');">
                                             <i class="fa-solid fa-link"></i> 複製連結
                                         </button>
-                                        <a href="lt2-sq3.jpg" download="lt2-sq3.jpg" class="small-btn">
+                                        <a href="lt2-tq3.jpg" download="lt2-tq3.jpg" class="small-btn">
                                             <i class="fa-solid fa-download"></i> 下載QR
                                         </a>
                                     </div>
@@ -756,20 +834,20 @@
                         <div id="pane-2-4" class="tab-pane">
                             <div class="resource-card">
                                 <div class="preview-section">
-                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt2-student-part4/" scrolling="no"></iframe>
+                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt2-teacher-part4/" scrolling="no"></iframe>
                                 </div>
                                 <div class="action-section">
                                     <div class="qr-box">
-                                        <img src="lt2-sq4.jpg" alt="QR Code 4">
+                                        <img src="lt2-tq4.jpg" alt="QR Code 4">
                                     </div>
-                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt2-student-part4/')">
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt2-teacher-part4/')">
                                         <i class="fa-solid fa-door-open"></i> 進入互動課本
                                     </button>
                                     <div class="small-actions">
-                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt2-student-part4/'); alert('已成功複製連結！');">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt2-teacher-part4/'); alert('已成功複製連結！');">
                                             <i class="fa-solid fa-link"></i> 複製連結
                                         </button>
-                                        <a href="lt2-sq4.jpg" download="lt2-sq4.jpg" class="small-btn">
+                                        <a href="lt2-tq4.jpg" download="lt2-tq4.jpg" class="small-btn">
                                             <i class="fa-solid fa-download"></i> 下載QR
                                         </a>
                                     </div>
