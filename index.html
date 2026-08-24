@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>職業中文傳意—電子教學平台 (LAN4002)</title>
     
+    <!-- === PWA 設定開始 === -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#9b59b6">
+    <link rel="apple-touch-icon" href="P1.jpg"> <!-- 讓 iOS Safari 能抓取正確圖示 -->
+    <!-- === PWA 設定結束 === -->
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1G1KSXH8DB"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -1638,6 +1644,19 @@
             modal.classList.remove('active');
             iframe.src = ''; 
             document.body.style.overflow = 'auto'; 
+        }
+
+        // === 註冊 Service Worker ===
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker 註冊成功，範圍為: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker 註冊失敗: ', err);
+                    });
+            });
         }
     </script>
 </body>
