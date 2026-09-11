@@ -352,6 +352,34 @@
         .modal-body { flex: 1; width: 100%; position: relative; }
         .modal-body iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
+        /* =========================================
+           新增的自訂安裝 App 懸浮按鍵 CSS
+           ========================================= */
+        #install-app-btn {
+            display: none; /* 預設隱藏，等待觸發 */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-4002-gradient);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            box-shadow: 0 10px 25px rgba(236, 64, 122, 0.4);
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #install-app-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(236, 64, 122, 0.6);
+        }
+
         /* ==============================================================
            響應式設計 (RWD) Media Queries
            ============================================================== */
@@ -373,6 +401,13 @@
             .action-section { width: 100%; flex-direction: column; box-sizing: border-box; }
             .small-actions { width: 100%; flex-direction: row; gap: 10px; }
             .preview-section { min-height: 280px; width: 100%; box-sizing: border-box; }
+
+            #install-app-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1155,7 +1190,27 @@
                             </div>
                         </div>
                         <div id="pane-4-5" class="tab-pane">
-                            <h2 style="color: #9070a1; text-align: center; margin-top: 20px;">互動課本製作中......</h2>
+                            <div class="resource-card">
+                                <div class="preview-section">
+                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt4-teacher-part5/" scrolling="no"></iframe>
+                                </div>
+                                <div class="action-section">
+                                    <div class="qr-box">
+                                        <img src="lt4-tq5.jpg" alt="QR Code 5">
+                                    </div>
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt4-teacher-part5/')">
+                                        <i class="fa-solid fa-door-open"></i> 進入互動課本
+                                    </button>
+                                    <div class="small-actions">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt4-teacher-part5/'); alert('已成功複製連結！');">
+                                            <i class="fa-solid fa-link"></i> 複製連結
+                                        </button>
+                                        <a href="lt4-tq5.jpg" download="lt4-tq5.jpg" class="small-btn">
+                                            <i class="fa-solid fa-download"></i> 下載QR
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1240,7 +1295,27 @@
                             </div>
                         </div>
                         <div id="pane-5-3" class="tab-pane">
-                            <h2 style="color: #9070a1; text-align: center; margin-top: 20px;">互動課本製作中......</h2>
+                            <div class="resource-card">
+                                <div class="preview-section">
+                                    <iframe class="preview-iframe" src="https://winwin1109.github.io/4002-lt5-teacher-part3/" scrolling="no"></iframe>
+                                </div>
+                                <div class="action-section">
+                                    <div class="qr-box">
+                                        <img src="lt5-tq3.jpg" alt="QR Code 3">
+                                    </div>
+                                    <button class="enter-btn-large" onclick="openInteractiveModal('https://winwin1109.github.io/4002-lt5-teacher-part3/')">
+                                        <i class="fa-solid fa-door-open"></i> 進入互動課本
+                                    </button>
+                                    <div class="small-actions">
+                                        <button class="small-btn" onclick="navigator.clipboard.writeText('https://winwin1109.github.io/4002-lt5-teacher-part3/'); alert('已成功複製連結！');">
+                                            <i class="fa-solid fa-link"></i> 複製連結
+                                        </button>
+                                        <a href="lt5-tq3.jpg" download="lt5-tq3.jpg" class="small-btn">
+                                            <i class="fa-solid fa-download"></i> 下載QR
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1605,15 +1680,21 @@
         </div>
     </div>
 
+    <!-- =========================================
+         新增的自訂安裝按鍵 HTML 
+         ========================================= -->
+    <button id="install-app-btn">
+        <i class="fa-solid fa-download"></i> 下載學生版 APPS
+    </button>
+
     <script>
-        // 視圖切換
+        // === 視圖切換與 Modal 邏輯 ===
         function showView(viewId) {
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        // 課程內文標籤頁 (Tabs) 切換邏輯
         function switchLessonTab(paneId, btnElement) {
             const container = btnElement.closest('.lesson-tabs-container');
             container.querySelectorAll('.tab-pane').forEach(pane => {
@@ -1629,7 +1710,6 @@
             }
         }
 
-        // 全螢幕互動課本 (Modal)
         function openInteractiveModal(url) {
             const modal = document.getElementById('interactive-modal');
             const iframe = document.getElementById('modal-iframe');
@@ -1658,6 +1738,47 @@
                     });
             });
         }
+
+        // =========================================
+        // PWA 攔截與安裝按鍵觸發邏輯
+        // =========================================
+        let deferredPrompt;
+        const installBtn = document.getElementById('install-app-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // 防止瀏覽器預設的安裝提示自動彈出
+            e.preventDefault();
+            // 儲存事件，以便稍後由按鈕觸發
+            deferredPrompt = e;
+            // 顯示自訂的安裝按鈕
+            installBtn.style.display = 'flex'; 
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt !== null) {
+                // 顯示瀏覽器原生的安裝對話框
+                deferredPrompt.prompt();
+                
+                // 獲取學生的選擇結果
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('已同意安裝 App');
+                } else {
+                    console.log('已拒絕安裝 App');
+                }
+                
+                // 無論結果如何，都隱藏按鈕並清空事件
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            }
+        });
+
+        // 如果學生已經安裝過，隱藏按鈕
+        window.addEventListener('appinstalled', () => {
+            installBtn.style.display = 'none';
+            deferredPrompt = null;
+            console.log('PWA 已成功安裝');
+        });
     </script>
 </body>
 </html>

@@ -1,42 +1,33 @@
-const CACHE_NAME = 'lan4002-student-cache-v1';
-
-// 您可以把需要離線存取的檔案加進這個陣列
+const CACHE_NAME = 'vtc-chinese-app-v2';
 const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
-  // 建議您後續可以把用到的圖片也加進來，例如:
-  // './P1.jpg',
-  // './P2.jpg'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
 ];
 
-// 安裝 Service Worker 並快取基本檔案
+// 1. 安裝階段：快取基本的檔案
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
+        console.log('已開啟快取');
         return cache.addAll(urlsToCache);
       })
   );
 });
 
-// 攔截網路請求，優先回傳快取檔案
+// 2. 攔截請求：採用「網路優先，失敗則讀取快取」的策略
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // 如果在快取中找到對應檔案，就直接回傳
-        if (response) {
-          return response;
-        }
-        // 否則透過網路抓取
-        return fetch(event.request);
-      })
+    fetch(event.request).catch(() => {
+      // 如果沒有網路，則從快取中尋找資源
+      return caches.match(event.request);
+    })
   );
 });
 
-// 啟用新的 Service Worker 並刪除舊的快取
+// 3. 啟用階段：清除舊版本的快取
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
